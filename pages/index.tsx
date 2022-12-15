@@ -28,8 +28,9 @@ const Home = () => {
     setApiOutput(`${output.text}`);
     setIsGenerating(false);
   }
-  const onUserChangedText = (e) => {
-    setUserInput(e.target.value);
+  const onUserChangedText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const userInput = e.target as HTMLTextAreaElement
+    setUserInput(userInput.value);
   };
 
   return (
@@ -40,14 +41,19 @@ const Home = () => {
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>AI Copywriter</h1>
+            <h1>AI Product Advert Copywriter</h1>
           </div>
           <div className="header-subtitle">
             <h2>Input the product and what it does, we'll do the rest</h2>
+            <h3>Example input:</h3>
+            <p>Product: 2022 Porsche 911</p>
+            <p>Tone: Mature, technical</p>
+            <p>Features: Four wheel steering, V12 quad-turbo engine, 1000HP</p>
+
           </div>
         </div>
         <div className="prompt-container">
-          <textarea placeholder="start typing here" className="prompt-box" value={userInput} onChange={onUserChangedText} />
+          <textarea placeholder="Give some product details, features, fun facts, etc" className="prompt-box" value={userInput} onChange={onUserChangedText} />
           <div className="prompt-buttons">
             <a className={isGenerating ? 'generate-button loading' : 'generate-button'} onClick={callGenerateEndpoint}>
               <div className="generate">
